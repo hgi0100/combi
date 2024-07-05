@@ -2,11 +2,7 @@
 // 20/02/24
 // Neil Crago <n.j.crago@gmail.com>
 //
-// A program to explore Combinatorics using a Genetic Algorithm
-// to solve the TSP (Travelling Salesman Problem)
-// Every time i run this thing I get different answers,
-// so must be a problem, though probabalistic it's too weird
-// possibly unusable, bruteforce may be better
+// A program to explore Combinatorics using a Genetic Algorithm to solve the TSP (Travelling Salesman Problem)
 //
 
 use rand::prelude::SliceRandom;
@@ -45,8 +41,10 @@ fn tour_length(cities: &[City], order: &[usize]) -> f64 {
         let next_city = &cities[order[i + 1]];
         total_distance += distance(current_city, next_city);
     }
+    
     // Add distance from last city back to first city to complete the loop
     total_distance += distance(&cities[order[cities.len() - 1]], &cities[order[0]]);
+    
     total_distance
 }
 
@@ -188,7 +186,8 @@ fn genetic_algorithm_tsp(
 }
 
 fn main() {
-    // Sample set of city coordinates
+    
+    // Fake set of city coordinates
     let cities = vec![
         City { x: 1.0, y: 2.0 },
         City { x: 7.0, y: 11.0 },
@@ -209,6 +208,7 @@ fn main() {
         genetic_algorithm_tsp(&cities, population_size, iterations, mutation_rate);
 
     let best_tour = &best_chromosome.genes;
+    
     // println!("order = {:?}", &best_chromosome.genes);
     let best_distance = tour_length(&cities, best_tour);
 
